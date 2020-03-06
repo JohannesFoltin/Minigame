@@ -7,46 +7,25 @@ import java.io.*;
 
 
 public class haupt {
+	public static String[] woerter = null;
+	public static int versuche = 13;
+	public static int randomwort = 0 ;
+	public static String[] woerter1 = new String[378];
+	public static String[] woerter0 = new String[378];
+	public static String wort2;
+	public static boolean gibbesnicht = true;
+	public static Vector<Character> wrongchars = new Vector<>();
+	public static ArrayList<String> loesungswort = new ArrayList<>();
+
 	public static void main(String[] args) throws IOException {
-		String[] woerter = null;
-		int versuche = 13;
-		
-		Random random = new Random();
-		Scanner scannerdifficulty = new Scanner(System.in);
-		System.out.println("W√§hle einen Schwierigkeitsgrad (einfach w√∂rter oder schwere W√∂rter) (0 oder 1) : ");
-		int difficulty = scannerdifficulty.nextInt();
-		if (difficulty == 1) {
-			String[] woerter1 = new String[378];
-			FileReader ja = new FileReader("/home/johannes/eclipse-workspace/Minigame-master/IchMagKekse/src/woerter.txt");
-			BufferedReader nein = new BufferedReader(ja);
-			for(int i = 0; i < 378; i++) {
-				woerter1[i] = nein.readLine();
-			}
-			nein.close();
-			woerter = woerter1;
-		}
-		else if (difficulty == 0){
-			String[] woerter0 = new String[378];
-			FileReader ja = new FileReader("/home/johannes/eclipse-workspace/Minigame-master/IchMagKekse/src/woerter.txt");
-			BufferedReader nein = new BufferedReader(ja);
-			for(int i = 0; i < 378; i++) {
-				woerter0[i] = nein.readLine();
-			}
-			nein.close();
-			woerter = woerter0;
-		
-		}
-		int randomwort = 0 ;
-		randomwort = random.nextInt(woerter.length);
-		String wort2 = woerter[randomwort];
+		System.out.println("W‰hle einen Schwierigkeitsgrad (einfach wˆrter oder schwere Wˆrter) (0 oder 1) : ");
+		diffikulty();
+		zufallswort();
 		char[] wort = new char[wort2.length()]; 
 		for (int i = 0; i < wort2.length(); i++) { 
 	            wort[i] = wort2.charAt(i); 
 	        } 
 		
-		boolean gibbesnicht = true;
-		Vector<Character> wrongchars = new Vector<>();
-		ArrayList<String> loesungswort = new ArrayList<>();
 		for(int i=0; i<wort.length; i++){
 			loesungswort.add("_");
 		}
@@ -78,7 +57,7 @@ public class haupt {
 				System.out.println("GAME OVER");
 				System.out.println("--------\n|      |\n|      0\n|     \\ /\n|      |\n|     / \\\n|");
 				System.out.print(wort);
-				System.out.print(" w√§re richtig gewesen");
+				System.out.print(" w‰re richtig gewesen");
 				break;
 				
 			}
@@ -99,6 +78,38 @@ public class haupt {
 			}
 			}
 		}
-		
+}
+
+public static void diffikulty() throws IOException {
+	
+	Scanner scannerdifficulty = new Scanner(System.in);
+	
+	int difficulty = scannerdifficulty.nextInt();	
+	if (difficulty == 1) {
+			FileReader ja = new FileReader("H:\\F‰cher\\Whl. ITg\\Java\\Hangman\\src\\woerter.txt");
+			BufferedReader nein = new BufferedReader(ja);
+			for(int i = 0; i < 378; i++) {
+			woerter1[i] = nein.readLine();
+		}
+		nein.close();
+		woerter = woerter1;
 	}
+	else if (difficulty == 0){
+		FileReader ja = new FileReader("/home/johannes/eclipse-workspace/Minigame-master/IchMagKekse/src/woerter.txt");
+		BufferedReader nein = new BufferedReader(ja);
+		for(int i = 0; i < 378; i++) {
+			woerter0[i] = nein.readLine();
+		}       
+		nein.close();
+		woerter = woerter0;
+		}
+	}
+public static void zufallswort() {
+	Random random = new Random();
+	randomwort = random.nextInt(woerter.length);
+	String wort2 = woerter[randomwort];
+	
+	
+	
+}
 }
